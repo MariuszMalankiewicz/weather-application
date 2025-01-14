@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
-import WeatherPage from '../views/WeatherPage.vue'
+import WeatherPage from '../views/HomePage.vue'
 
 const routes = [
   { path: '/', component: LoginPage },
