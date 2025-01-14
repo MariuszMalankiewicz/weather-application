@@ -30,7 +30,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import CityList from '../components/CityList.vue';
 import Watchlist from '../components/Watchlist.vue';
 import { fetchCitiesData } from '../utils/fetchCities';
-import { fetchWeatherData } from '../utils/fetchWeather'; // Importowanie funkcji pogodowej
+import { fetchWeatherData } from '../utils/fetchWeather';
 
 export default {
   name: 'HomePage',
@@ -46,13 +46,11 @@ export default {
     const hasMoreCities = ref(true);
     const weatherInterval = ref<any>(null);
 
-    // Funkcja do pobierania danych miast
     const fetchCities = async () => {
       cities.value = await fetchCitiesData();
       loadCitiesPage(0);
     };
 
-    // Ładowanie miast na stronę
     const loadCitiesPage = (page: number) => {
       const start = page * pageSize;
       const end = start + pageSize;
@@ -60,7 +58,6 @@ export default {
       hasMoreCities.value = end < cities.value.length;
     };
 
-    // Filtracja miast
     const filterCities = () => {
       if (searchQuery.value) {
         filteredCities.value = cities.value
@@ -73,56 +70,47 @@ export default {
       }
     };
 
-    // Ładowanie kolejnych miast
     const loadMoreCities = () => {
       currentPage.value += 1;
       loadCitiesPage(currentPage.value);
     };
 
-    // Dodawanie miasta do listy obserwowanych
     const addToWatchlist = (city: any) => {
       if (!watchlist.value.includes(city)) watchlist.value.push(city);
-      fetchWeatherForCity(city.name); // Pobieranie pogody po dodaniu
+      fetchWeatherForCity(city.name);
     };
 
-    // Usuwanie miasta z listy obserwowanych
     const removeFromWatchlist = (city: any) => {
       watchlist.value = watchlist.value.filter(c => c.id !== city.id);
-      delete weatherData.value[city.name]; // Usuwanie danych pogodowych
+      delete weatherData.value[city.name];
     };
 
-    // Funkcja pobierająca dane pogodowe dla danego miasta
     const fetchWeatherForCity = async (cityName: string) => {
       const weather = await fetchWeatherData(cityName);
       weatherData.value[cityName] = weather;
     };
 
-    // Funkcja do pobierania danych pogodowych dla wszystkich obserwowanych miast
     const fetchWeatherForWatchlist = () => {
       watchlist.value.forEach((city: any) => {
         fetchWeatherForCity(city.name);
       });
     };
 
-    // Uruchamianie cyklicznego pobierania danych pogodowych
     const startWeatherUpdates = () => {
-      weatherInterval.value = setInterval(fetchWeatherForWatchlist, 60000); // Co 60 sekund
+      weatherInterval.value = setInterval(fetchWeatherForWatchlist, 60000);
     };
 
-    // Zatrzymywanie cyklicznego pobierania danych
     const stopWeatherUpdates = () => {
       if (weatherInterval.value) {
-        clearInterval(weatherInterval.value); // Zatrzymywanie
+        clearInterval(weatherInterval.value);
       }
     };
 
-    // Rozpoczynamy pobieranie danych po załadowaniu komponentu
     onMounted(() => {
       fetchCities();
-      startWeatherUpdates(); // Rozpoczynanie cyklicznego pobierania danych pogodowych
+      startWeatherUpdates();
     });
 
-    // Zatrzymujemy cykliczne pobieranie danych, gdy komponent jest usuwany
     onBeforeUnmount(() => {
       stopWeatherUpdates();
     });

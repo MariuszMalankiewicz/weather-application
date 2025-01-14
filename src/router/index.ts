@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
-import WeatherPage from '../views/HomePage.vue'
+import HomePage from '../views/HomePage.vue'
+import WeatherChart from '../components/WeatherChart.vue'
 
 const routes = [
   { path: '/', component: LoginPage },
   {
     path: '/weather',
-    component: WeatherPage,
+    component: HomePage,
     beforeEnter: (to, from, next) => {
       const user = localStorage.getItem('user')
       if (!user) {
@@ -15,6 +16,12 @@ const routes = [
         next()
       }
     },
+  },
+  {
+    path: '/weather-chart',
+    name: 'weather-chart',
+    component: WeatherChart,
+    props: (route) => ({ cityName: route.query.city }),
   },
 ]
 

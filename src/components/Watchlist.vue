@@ -3,21 +3,16 @@
     <h2>Obserwowane miasta</h2>
     <ul class="list-group">
       <li v-for="city in watchlist" :key="city.id" class="list-group-item">
-        {{ city.name }} ({{ city.country }})<br>
-        <span v-if="weatherData[city.name]">
-          Temperatura: {{ weatherData[city.name].temperature?.toFixed(0) }}°C,
-          Wilgotność: {{ weatherData[city.name].humidity }}%
-        </span>
-        <span v-else>
-          Brak danych pogodowych
-        </span>
+        {{ city.name }} ({{ city.country }})
+        <button @click="viewWeatherChart(city.name)" class="btn btn-link">Zobacz wykres</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Watchlist',
@@ -26,10 +21,18 @@ export default defineComponent({
       type: Array as PropType<any[]>,
       required: true,
     },
-    weatherData: {
-      type: Object as PropType<{ [key: string]: { temperature: number | null, humidity: number | null } }>,
-      required: true,
-    },
   },
-});
+  setup() {
+    const router = useRouter()
+
+    const viewWeatherChart = (cityName: string) => {
+      router.push({
+        name: 'weather-chart',
+        query: { city: cityName },
+      })
+    }
+
+    return { viewWeatherChart }
+  },
+})
 </script>
