@@ -2,7 +2,7 @@
   <div>
     <h1>Wykres pogody dla {{ cityName }}</h1>
     <div v-if="weatherData">
-      <p>Temperatura: {{ weatherData.temperature }}°C</p>
+      <p>Temperatura: {{ weatherData.temperature?.toFixed(0) }}°C</p>
       <p>Wilgotność: {{ weatherData.humidity }}%</p>
     </div>
     <div v-else>
