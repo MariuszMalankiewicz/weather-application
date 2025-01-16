@@ -11,11 +11,12 @@ export const getLocation = (): Promise<Location> => {
           })
         },
         (error) => {
-          reject(`Błąd pobierania lokalizacji: ${error.message}`)
+          alert('Enable location in the site settings')
+          reject(`Error Downloading Location: ${error.message}`)
         },
       )
     } else {
-      reject('Geolokalizacja nie jest wspierana w tej przeglądarce.')
+      reject('This solution does not support geolocation.')
     }
   })
 }

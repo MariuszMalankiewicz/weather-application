@@ -26,10 +26,6 @@
             :addToWatchlist="addToWatchlist"
             :removeFromWatchlist="removeFromWatchlist"
           />
-          <div>
-            <button @click="fetchLocation">Pobierz lokalizację</button>
-            <p v-if="location">Twoja lokalizacja: {{ location.lat }}, {{ location.lon }}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -38,12 +34,11 @@
 
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import UserPanel from '../components/UserPanel.vue'
+import UserPanel from '../components/RightSitePanel.vue'
 import CitySearchPanel from '../components/CitySearchPanel.vue'
 import CityWatchListPanel from '../components/CityWatchListPanel.vue'
 import { fetchCitiesData } from '../utils/fetchCities'
 import { fetchWeatherData } from '../utils/fetchWeather'
-import { getLocation } from '@/utils/geolocation'
 import Awatar from '../assets/awatar.jpeg'
 
 export default {
@@ -59,15 +54,7 @@ export default {
     const watchlist = ref([])
     const weatherData = ref<Record<string, any>>({})
     const weatherInterval = ref<any>(null)
-    const location = ref<{ lat: number; lon: number } | null>(null)
 
-    const fetchLocation = async () => {
-      try {
-        location.value = await getLocation()
-      } catch (error) {
-        console.error('Błąd pobierania lokalizacji:', error)
-      }
-    }
 
     const fetchCities = async () => {
       cities.value = await fetchCitiesData()
@@ -130,8 +117,6 @@ export default {
       filterCities,
       addToWatchlist,
       removeFromWatchlist,
-      location,
-      fetchLocation,
     }
   },
 }
