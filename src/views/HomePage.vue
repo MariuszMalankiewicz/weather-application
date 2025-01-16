@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="overflow-hidden">
       <div class="row">
         <!-- User panel -->
          <div class="col-12 col-md-5 order-md-2">

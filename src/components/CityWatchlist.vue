@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="row">
-      <div v-for="city in watchlist" :key="city.id" class="col-6 text-center">
-        <img :src="cityImg" alt="city" class="rounded" style="max-width: 150px;">
+      <div v-for="city in watchlist" :key="city.id" class="col-6 col-sm-4 col-sm-6 col-lg-4 col-xl-3 col-xxl-2 text-center">
+        <img :src="cityImg" alt="city" class="rounded img-rwd">
         <p class="mt-1 mb-0">{{ city.name }}, {{ city.country }}</p>
         <button
           @click="viewWeatherChart(city.name)"
@@ -10,7 +10,6 @@
         >
           Details
         </button>
-
       </div>
     </div>
   </div>
@@ -48,3 +47,9 @@ export default defineComponent({
   },
 })
 </script>
+<style>
+.img-rwd{
+  width: 100%;
+  max-width: 160px;
+}
+</style>
