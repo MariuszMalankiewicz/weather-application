@@ -1,61 +1,47 @@
 <template>
-  <div>
-    <h1>Wyszukiwanie miast</h1>
-    <input
-      type="text"
-      v-model="searchQuery"
-      @input="filterCities"
-      placeholder="Wyszukaj miasto..."
-      class="form-control mb-3"
-    />
-    <CityList
-      :cities="filteredCities"
-      :watchlist="watchlist"
-      @add="addToWatchlist"
-      @remove="removeFromWatchlist"
-    />
-    <Watchlist :watchlist="watchlist" :weatherData="weatherData" />
-    <button
-      v-if="hasMoreCities"
-      @click="loadMoreCities"
-      class="btn btn-primary mt-3"
-    >
-      Załaduj więcej
-    </button>
+  <div class="overflow-hidden">
+    <div class="row" style="padding-left: 10px; padding-right: 10px;">
+      <!-- User panel -->
+      <UserPanel :awatar="Awatar" class="overflow-hidden" />
+
+      <!-- Weather panel -->
+      <WeatherPanel
+        :filteredCities="filteredCities"
+        :watchlist="watchlist"
+        :weatherData="weatherData"
+        v-model:searchQuery="searchQuery"
+        :addToWatchlist="addToWatchlist"
+        :removeFromWatchlist="removeFromWatchlist"
+        :filterCities="filterCities"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import CityList from '../components/CityList.vue';
-import Watchlist from '../components/Watchlist.vue';
+import UserPanel from '../components/UserPanel.vue';
+import WeatherPanel from '../components/WeatherPanel.vue';
 import { fetchCitiesData } from '../utils/fetchCities';
 import { fetchWeatherData } from '../utils/fetchWeather';
+import Awatar from '../assets/awatar.jpeg';
 
 export default {
   name: 'HomePage',
-  components: { CityList, Watchlist },
+  components: { UserPanel, WeatherPanel },
+  data() {
+    return { Awatar };
+  },
   setup() {
     const cities = ref([]);
     const filteredCities = ref([]);
     const searchQuery = ref('');
     const watchlist = ref([]);
-    const weatherData = ref<{ [key: string]: { temperature: number | null, humidity: number | null } }>({});
-    const currentPage = ref(0);
-    const pageSize = 3;
-    const hasMoreCities = ref(true);
+    const weatherData = ref<Record<string, any>>({});
     const weatherInterval = ref<any>(null);
 
     const fetchCities = async () => {
       cities.value = await fetchCitiesData();
-      loadCitiesPage(0);
-    };
-
-    const loadCitiesPage = (page: number) => {
-      const start = page * pageSize;
-      const end = start + pageSize;
-      filteredCities.value = cities.value.slice(start, end);
-      hasMoreCities.value = end < cities.value.length;
     };
 
     const filterCities = () => {
@@ -64,15 +50,10 @@ export default {
           .filter(city =>
             city.name.toLowerCase().includes(searchQuery.value.toLowerCase())
           )
-          .slice(0, pageSize);
+          .slice(0, 5);
       } else {
-        loadCitiesPage(currentPage.value);
+        filteredCities.value = [];
       }
-    };
-
-    const loadMoreCities = () => {
-      currentPage.value += 1;
-      loadCitiesPage(currentPage.value);
     };
 
     const addToWatchlist = (city: any) => {
@@ -101,9 +82,7 @@ export default {
     };
 
     const stopWeatherUpdates = () => {
-      if (weatherInterval.value) {
-        clearInterval(weatherInterval.value);
-      }
+      if (weatherInterval.value) clearInterval(weatherInterval.value);
     };
 
     onMounted(() => {
@@ -116,13 +95,12 @@ export default {
     });
 
     return {
-      searchQuery,
+      cities,
       filteredCities,
+      searchQuery,
       watchlist,
       weatherData,
       filterCities,
-      loadMoreCities,
-      hasMoreCities,
       addToWatchlist,
       removeFromWatchlist,
     };

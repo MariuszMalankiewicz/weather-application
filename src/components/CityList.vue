@@ -1,5 +1,5 @@
 <template>
-  <ul class="list-group mb-3">
+  <ul class="list-group mb-3 ms-sm-2 ms-lg-3 ms-xl-4" style="width: 300px;">
     <CityListItem
       v-for="city in cities"
       :key="city.id"
