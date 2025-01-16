@@ -1,4 +1,3 @@
-// src/utils/geolocation.ts
 import type { Location } from '@/types/types'
 
 export const getLocation = (): Promise<Location> => {
