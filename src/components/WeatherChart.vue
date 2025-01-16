@@ -21,7 +21,10 @@ export default defineComponent({
     cityName: String,
   },
   setup(props) {
-    const weatherData = ref<{ temperature: number | null; humidity: number | null }>({ temperature: null, humidity: null })
+    const weatherData = ref<{ temperature: number | null; humidity: number | null }>({
+      temperature: null,
+      humidity: null,
+    })
 
     onMounted(async () => {
       try {

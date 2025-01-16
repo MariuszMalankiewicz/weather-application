@@ -1,7 +1,11 @@
 <template>
   <div class="d-flex flex-column flex-lg-row align-items-center vh-100 mt-5 mt-lg-0">
     <div class="row w-100">
-    <img :src="LoginRafiki" alt="login image" class="mx-auto col-12 col-sm-7 col-lg-12 col-xl-11 col-xxl-9 me-lg-0" />
+      <img
+        :src="LoginRafiki"
+        alt="login image"
+        class="mx-auto col-12 col-sm-7 col-lg-12 col-xl-11 col-xxl-9 me-lg-0"
+      />
     </div>
     <div class="p-4 row flex-column w-100 h-50">
       <h2 class="text-center text-lg-start mb-4 fw-bold">Zaloguj się</h2>
@@ -33,30 +37,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import LoginRafiki from '../assets/Login-rafiki.png';
+import { defineComponent, ref } from 'vue'
+import LoginRafiki from '../assets/Login-rafiki.png'
 
 export default defineComponent({
   name: 'LoginPage',
-  data (){
+  data() {
     return {
-      LoginRafiki
-    };
+      LoginRafiki,
+    }
   },
   setup() {
-    const username = ref('');
-    const password = ref('');
+    const username = ref('')
+    const password = ref('')
 
     const login = () => {
       if (username.value === 'user' && password.value === 'password') {
-        localStorage.setItem('user', username.value);
-        window.location.href = '/weather';
+        localStorage.setItem('user', username.value)
+        window.location.href = '/weather'
       } else {
-        alert('Invalid credentials');
+        alert('Invalid credentials')
       }
-    };
+    }
 
-    return { username, password, login };
+    return { username, password, login }
   },
-});
+})
 </script>
