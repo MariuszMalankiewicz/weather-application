@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router'
 import cityImg from '../assets/city.jpeg';
 
 export default defineComponent({
-  name: 'Watchlist',
+  name: 'CityWatchlist',
   data() {
     return {
       cityImg,

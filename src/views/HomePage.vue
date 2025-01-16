@@ -1,19 +1,33 @@
 <template>
-  <div class="overflow-hidden">
-    <div class="row" style="padding-left: 10px; padding-right: 10px;">
-      <!-- User panel -->
-      <UserPanel :awatar="Awatar" class="overflow-hidden" />
-
-      <!-- Weather panel -->
-      <WeatherPanel
-        :filteredCities="filteredCities"
-        :watchlist="watchlist"
-        :weatherData="weatherData"
-        v-model:searchQuery="searchQuery"
-        :addToWatchlist="addToWatchlist"
-        :removeFromWatchlist="removeFromWatchlist"
-        :filterCities="filterCities"
-      />
+  <div>
+    <div>
+      <div class="row">
+        <!-- User panel -->
+         <div class="col-12 col-md-5 order-md-2">
+          <UserPanel :awatar="Awatar" class="overflow-hidden" />
+        </div>
+        <!-- CitySearchPanel -->
+        <div class="col-12 col-md-7 order-md-1">
+          <CitySearchPanel
+          :filteredCities="filteredCities"
+          :watchlist="watchlist"
+          :weatherData="weatherData"
+          v-model:searchQuery="searchQuery"
+          :addToWatchlist="addToWatchlist"
+          :removeFromWatchlist="removeFromWatchlist"
+          :filterCities="filterCities"
+          />
+        <!-- CityWatchListPanel -->
+        <CityWatchListPanel
+          :watchlist="watchlist"
+          :weatherData="weatherData"
+          :searchQuery="searchQuery"
+          :filterCities="filterCities"
+          :addToWatchlist="addToWatchlist"
+          :removeFromWatchlist="removeFromWatchlist"
+        />
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,14 +35,15 @@
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import UserPanel from '../components/UserPanel.vue';
-import WeatherPanel from '../components/WeatherPanel.vue';
+import CitySearchPanel from '../components/CitySearchPanel.vue';
+import CityWatchListPanel from '../components/CityWatchListPanel.vue';
 import { fetchCitiesData } from '../utils/fetchCities';
 import { fetchWeatherData } from '../utils/fetchWeather';
 import Awatar from '../assets/awatar.jpeg';
 
 export default {
   name: 'HomePage',
-  components: { UserPanel, WeatherPanel },
+  components: { UserPanel, CitySearchPanel, CityWatchListPanel },
   data() {
     return { Awatar };
   },

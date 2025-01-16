@@ -1,14 +1,15 @@
 <template>
-  <div class="col-12 col-md-7 order-md-1 pt-4">
-    <div class="d-flex ms-sm-2 ms-lg-3 ms-xl-4 mt-sm-2 mt-xl-3">
-      <div class="position-relative">
-      <svg
-        class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 pb-2"
-        style="max-width: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="gray"
-        viewBox="0 0 512 512"
-      >
+      <!-- CitySearchInput -->
+    <div class="pt-4 px-4">
+      <div class="d-flex mt-md-2 mt-lg-3 ms-md-2 ms-lg-3">
+        <div class="position-relative">
+        <svg
+          class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 pb-2"
+          style="max-width: 20px"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="gray"
+          viewBox="0 0 512 512"
+          >
         <path
           d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
         />
@@ -21,6 +22,7 @@
         class="form-control placeholder-indent"
       />
     </div>
+    <!-- CityChooseList -->
     <div class="ms-2 w-25">
       <p class="mt-2">
         All places
@@ -35,33 +37,24 @@
         </svg>
       </p>
     </div>
-    </div>
+      </div>
+
     <CityList
       :cities="filteredCities"
       :watchlist="watchlist"
       @add="addToWatchlist"
       @remove="removeFromWatchlist"
     />
-
-    <div>
-      <p class="fs-1">
-        Weather <span class="fw-bold">Forecast</span>
-      </p>
     </div>
-    <div>
-      <Watchlist :watchlist="watchlist" :weatherData="weatherData" />
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import CityList from "./CityList.vue";
-import Watchlist from "./Watchlist.vue";
 
 export default defineComponent({
-  name: "WeatherPanel",
-  components: { CityList, Watchlist },
+  name: "CitySearchPanel",
+  components: { CityList },
   props: {
     filteredCities: Array,
     watchlist: Array,
