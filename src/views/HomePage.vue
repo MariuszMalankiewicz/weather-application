@@ -55,7 +55,6 @@ export default {
     const weatherData = ref<Record<string, any>>({})
     const weatherInterval = ref<any>(null)
 
-
     const fetchCities = async () => {
       cities.value = await fetchCitiesData()
     }
