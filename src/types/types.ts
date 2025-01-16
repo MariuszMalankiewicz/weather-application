@@ -8,3 +8,8 @@ export interface City {
   name: string
   weather: Weather
 }
+
+export interface Location {
+  lat: number
+  lon: number
+}
