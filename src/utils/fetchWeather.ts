@@ -1,10 +1,13 @@
 import axios from 'axios'
 import type { Weather } from '@/types/types'
 
-export const fetchCurrentWeatherFromLocation = async (location: Location): Promise<Weather> => {
+export const fetchCurrentWeatherFromLocation = async (
+  location: Location,
+  apiKey: string,
+): Promise<Weather> => {
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=817af5cfb42c312c3b5c282f65a06023&units=metric`,
+      `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`,
     )
     const city = response.data.name
     const country = response.data.sys.country
@@ -31,10 +34,10 @@ export const fetchCurrentWeatherFromLocation = async (location: Location): Promi
   }
 }
 
-export const fetchWeatherData = async (city: string): Promise<Weather> => {
+export const fetchWeatherData = async (city: string, apiKey: string): Promise<Weather> => {
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=817af5cfb42c312c3b5c282f65a06023&units=metric`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`,
     )
     const { temp, humidity } = response.data.main
 

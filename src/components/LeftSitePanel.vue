@@ -32,6 +32,8 @@ import CityList from './left-site-panel/CityList.vue'
 import CityWatchlist from './left-site-panel/CityWatchlist.vue'
 import { fetchCitiesData } from '../utils/fetchCities'
 import { fetchWeatherData } from '../utils/fetchWeather'
+import { API_KEY } from '../../config.js'
+
 export default {
   name: 'LeftSitePanel',
   components: { CitySearch, CityList, CityWatchlist },
@@ -68,7 +70,7 @@ export default {
     }
 
     const fetchWeatherForCity = async (cityName: string) => {
-      const weather = await fetchWeatherData(cityName)
+      const weather = await fetchWeatherData(cityName, API_KEY)
       weatherData.value[cityName] = weather
     }
 

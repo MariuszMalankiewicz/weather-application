@@ -50,6 +50,7 @@ import { ref, onMounted } from 'vue'
 import { getLocation } from '@/utils/geolocation'
 import { fetchCurrentWeatherFromLocation } from '@/utils/fetchWeather'
 import type { Weather } from '@/types/types'
+import { API_KEY } from '../../../config.js';
 
 export default {
   name: 'WeatherCurrent',
@@ -69,7 +70,7 @@ export default {
     onMounted(async () => {
       try {
         const location = await getLocation()
-        weatherData.value = await fetchCurrentWeatherFromLocation(location)
+        weatherData.value = await fetchCurrentWeatherFromLocation(location, API_KEY)
       } catch (err) {
         error.value = err as string
       }

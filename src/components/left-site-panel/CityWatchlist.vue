@@ -8,6 +8,8 @@
       >
         <img :src="cityImg" alt="city" class="rounded img-rwd" />
         <p class="mt-1 mb-0">{{ city.name }}, {{ city.country }}</p>
+        <p class="mt-1 mb-0">Temp: {{ weatherData[city.name]?.temp?.toFixed(0) }}°C</p>
+        <p class="mt-1 mb-0">Humidity: {{ weatherData[city.name]?.humidity }}%</p>
         <button @click="viewWeatherChart(city.name)" class="btn btn-link btn-sm mb-3">
           Details
         </button>
@@ -32,6 +34,10 @@ export default defineComponent({
     watchlist: {
       type: Array as PropType<any[]>,
       required: true,
+    },
+    weatherData: {
+      type: Object as PropType<Record<string, any>>,
+        required: true,
     },
   },
   setup() {
