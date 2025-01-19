@@ -8,59 +8,79 @@
       />
     </div>
     <div class="p-4 row flex-column w-100 h-50">
-      <h2 class="text-center text-lg-start mb-4 fw-bold">Zaloguj się</h2>
-      <div class="mb-3 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
-        <label for="username" class="form-label">Nazwa Użytkownika</label>
-        <input
-          v-model="username"
-          type="text"
-          id="username"
-          class="form-control"
-          placeholder="Wprowadz nazwę użytkownika"
-        />
-      </div>
-      <div class="mb-3 mb-xxl-4 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
-        <label for="password" class="form-label">Hasło</label>
-        <input
-          v-model="password"
-          type="password"
-          id="password"
-          class="form-control"
-          placeholder="Wprowadz hasło"
-        />
-      </div>
-      <div class="d-grid gap-2 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
-        <button @click="login" class="btn btn-primary">Zaloguj się</button>
-      </div>
+      <h2 class="text-center text-lg-start mb-4 fw-bold">Welcome!</h2>
+      <h5 class="text-center text-lg-start mb-4">Please log in to continue.</h5>
+
+      <form @submit.prevent="login">
+        <div class="mb-3 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
+          <label for="username" class="form-label">User Name</label>
+          <input
+            v-model="username"
+            type="text"
+            id="username"
+            class="form-control"
+            placeholder="Enter your username"
+            required
+          />
+          <div v-if="formSubmitted && !username" class="text-danger">Username is required.</div>
+        </div>
+
+        <div class="mb-3 mb-xxl-4 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
+          <label for="password" class="form-label">Password</label>
+          <input
+            v-model="password"
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Enter your password"
+            required
+          />
+          <div v-if="formSubmitted && !password" class="text-danger">Password is required.</div>
+        </div>
+
+        <div class="d-grid gap-2 col-12 col-sm-10 col-lg-10 col-xl-10 col-xxl-7 mx-auto mx-lg-0">
+          <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+
+        <div v-if="formSubmitted && !validCredentials" class="text-danger mt-3">
+          Invalid username or password.
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import LoginRafiki from '../assets/Login-rafiki.png'
 
 export default defineComponent({
   name: 'LoginPage',
-  data() {
-    return {
-      LoginRafiki,
-    }
-  },
   setup() {
+    const router = useRouter()
     const username = ref('')
     const password = ref('')
+    const formSubmitted = ref(false)
+    const validCredentials = ref(true)
 
     const login = () => {
+      formSubmitted.value = true
+
+      if (username.value === '' || password.value === '') {
+        validCredentials.value = true
+        return
+      }
+
       if (username.value === 'user' && password.value === 'password') {
         localStorage.setItem('user', username.value)
-        window.location.href = '/weather'
+        router.push('/weather')
       } else {
-        alert('Invalid credentials')
+        validCredentials.value = false
       }
     }
 
-    return { username, password, login }
+    return { username, password, formSubmitted, login, LoginRafiki, validCredentials }
   },
 })
 </script>
