@@ -38,8 +38,8 @@
   </div>
 </template>
 <script lang="ts">
-import TopHeader from '../components/TopHeader.vue'
-import WeatherCurrent from '../components/WeatherCurrent.vue'
+import TopHeader from './right-site-panel/TopHeader.vue'
+import WeatherCurrent from './right-site-panel/WeatherCurrent.vue'
 export default {
   name: 'RightSitePanel',
   components: { TopHeader, WeatherCurrent },

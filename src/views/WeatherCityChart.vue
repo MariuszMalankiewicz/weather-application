@@ -20,10 +20,10 @@ import { useRoute } from 'vue-router';
 import { fetchCityCoordinates } from '../utils/fetchCities.js'
 import { fetch5DayWeatherForecast } from '../utils/fetchWeather.js';
 import { API_KEY } from '../../config.js';
-import WeatherLineChart from './WeatherLineChart.vue';
+import WeatherLineChart from '../components/WeatherLineChart.vue';
 
 export default {
-  name: 'WeatherChart',
+  name: 'WeatherCityChart',
   components: {
     WeatherLineChart
   },

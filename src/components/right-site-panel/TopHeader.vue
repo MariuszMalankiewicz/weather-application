@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-start justify-content-between mb-5">
+  <header class="d-flex align-items-start justify-content-between mb-5">
     <div class="d-flex">
       <p class="me-3">Notification<span class="bg-danger rounded px-2 m-1">2</span></p>
       <p>Places</p>
@@ -11,13 +11,13 @@
       ></div>
       <img :src="awatar" alt="awatar" class="rounded me-4" style="width: 32px" />
     </div>
-  </div>
+  </header>
 </template>
 <script lang="ts">
-import awatar from '../assets/awatar.jpeg'
+import awatar from '../../assets/awatar.jpeg'
 export default {
   name: 'TopHeader',
-  data() {
+  setup() {
     return {
       awatar,
     }

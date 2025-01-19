@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { useRouter } from 'vue-router'
-import cityImg from '../assets/city.jpeg'
+import cityImg from '../../assets/city.jpeg'
 
 export default defineComponent({
   name: 'CityWatchlist',

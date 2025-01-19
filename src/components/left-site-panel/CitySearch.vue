@@ -1,5 +1,4 @@
 <template>
-  <!-- CitySearchInput -->
   <div class="pt-4 px-4">
     <div class="d-flex mt-md-2 mt-lg-3 ms-md-2 ms-lg-3">
       <div class="position-relative">
@@ -22,7 +21,6 @@
           class="form-control placeholder-indent"
         />
       </div>
-      <!-- CityChooseList -->
       <div class="ms-2 w-25">
         <p class="mt-2">
           All places
@@ -34,30 +32,17 @@
         </p>
       </div>
     </div>
-
-    <CityList
-      :cities="filteredCities"
-      :watchlist="watchlist"
-      @add="addToWatchlist"
-      @remove="removeFromWatchlist"
-    />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import CityList from './CityList.vue'
 
 export default defineComponent({
-  name: 'CitySearchPanel',
-  components: { CityList },
+  name: 'CitySearch',
   props: {
-    filteredCities: Array,
-    watchlist: Array,
     weatherData: Object,
     searchQuery: String,
-    addToWatchlist: Function,
-    removeFromWatchlist: Function,
     filterCities: Function,
   },
   setup(props, { emit }) {

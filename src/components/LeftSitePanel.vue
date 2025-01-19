@@ -1,52 +1,40 @@
 <template>
   <div>
-    <div class="overflow-hidden">
-      <div class="row">
-        <!-- User panel -->
-        <div class="col-12 col-md-5 order-md-2">
-          <UserPanel :awatar="Awatar" class="overflow-hidden" />
-        </div>
-        <!-- CitySearchPanel -->
-        <div class="col-12 col-md-7 order-md-1">
-          <CitySearchPanel
-            :filteredCities="filteredCities"
-            :watchlist="watchlist"
-            :weatherData="weatherData"
-            v-model:searchQuery="searchQuery"
-            :addToWatchlist="addToWatchlist"
-            :removeFromWatchlist="removeFromWatchlist"
-            :filterCities="filterCities"
-          />
-          <!-- CityWatchListPanel -->
-          <CityWatchListPanel
-            :watchlist="watchlist"
-            :weatherData="weatherData"
-            :searchQuery="searchQuery"
-            :filterCities="filterCities"
-            :addToWatchlist="addToWatchlist"
-            :removeFromWatchlist="removeFromWatchlist"
-          />
-        </div>
+    <CitySearch
+    :filteredCities="filteredCities"
+    :watchlist="watchlist"
+    :weatherData="weatherData"
+    v-model:searchQuery="searchQuery"
+    :addToWatchlist="addToWatchlist"
+    :removeFromWatchlist="removeFromWatchlist"
+    :filterCities="filterCities"
+    />
+    <CityList
+      :cities="filteredCities"
+      :watchlist="watchlist"
+      @add="addToWatchlist"
+      @remove="removeFromWatchlist"
+    />
+    <div class="px-4">
+      <p class="fs-1">Weather <span class="fw-bold">Forecast</span></p>
+      <div>
+        <CityWatchlist
+        :watchlist="watchlist"
+        :weatherData="weatherData" />
       </div>
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import UserPanel from '../components/RightSitePanel.vue'
-import CitySearchPanel from '../components/CitySearchPanel.vue'
-import CityWatchListPanel from '../components/CityWatchListPanel.vue'
+import CitySearch from './left-site-panel/CitySearch.vue'
+import CityList from './left-site-panel/CityList.vue'
+import CityWatchlist from './left-site-panel/CityWatchlist.vue'
 import { fetchCitiesData } from '../utils/fetchCities'
 import { fetchWeatherData } from '../utils/fetchWeather'
-import Awatar from '../assets/awatar.jpeg'
-
 export default {
-  name: 'HomePage',
-  components: { UserPanel, CitySearchPanel, CityWatchListPanel },
-  data() {
-    return { Awatar }
-  },
+  name: 'LeftSitePanel',
+  components: { CitySearch, CityList, CityWatchlist },
   setup() {
     const cities = ref([])
     const filteredCities = ref([])
