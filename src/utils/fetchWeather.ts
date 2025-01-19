@@ -16,7 +16,7 @@ export const fetchCurrentWeatherFromLocation = async (location: Location): Promi
 
     return { temp, humidity, temp_max, temp_min, feels_like, city, country, iconUrl, date }
   } catch (error) {
-    console.error('Błąd pobierania pogody na podstawie lokalizacji:', error)
+    console.error(error)
     return {
       temp: null,
       humidity: null,
@@ -37,9 +37,21 @@ export const fetchWeatherData = async (city: string): Promise<Weather> => {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=817af5cfb42c312c3b5c282f65a06023&units=metric`,
     )
     const { temp, humidity } = response.data.main
+
     return { temp: temp, humidity: humidity }
   } catch (error) {
-    console.error(`Błąd pobierania danych dla miasta ${city}:`, error)
+    console.error(error)
     return { temp: null, humidity: null }
+  }
+}
+
+export const fetch5DayWeatherForecast = async (lat: number, lon: number, apiKey: string) => {
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
+    )
+    return response.data.list
+  } catch (error) {
+    console.log(error)
   }
 }
