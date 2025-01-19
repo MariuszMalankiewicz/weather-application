@@ -38,7 +38,7 @@
         <p>{{ weatherData.city }}, {{ weatherData.country }}</p>
         <div class="d-flex gap-3">
           <p>max: {{ weatherData.temp_max?.toFixed(0) }}°C</p>
-          <p>feels_like: {{ weatherData.feels_like?.toFixed(0) }}°C</p>
+          <p>feels like: {{ weatherData.feels_like?.toFixed(0) }}°C</p>
           <p>min: {{ weatherData.temp_min?.toFixed(0) }}°C</p>
         </div>
       </div>

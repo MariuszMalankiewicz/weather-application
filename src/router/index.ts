@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: '/weather-chart',
-    name: 'weather-city-chart',
+    name: 'weather-chart',
     component: WeatherCityChart,
     props: (route) => ({ cityName: route.query.city }),
   },
