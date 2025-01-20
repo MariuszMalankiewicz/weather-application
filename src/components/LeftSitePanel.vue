@@ -17,6 +17,7 @@
     />
     <div class="px-4">
       <p class="fs-1">Weather <span class="fw-bold">Forecast</span></p>
+      <p class="pb-2" v-if="watchlist.length">Watchlist: {{ watchlist.length }}/10</p>
       <div>
         <CityWatchlist
         :watchlist="watchlist"
@@ -62,13 +63,18 @@ export default {
     }
 
     const addToWatchlist = (city: any) => {
-      if (!watchlist.value.includes(city)) {
-        watchlist.value.push(city)
-        fetchWeatherForCity(city.name)
-      }
-      searchQuery.value = ''
-      filteredCities.value = []
+  // Sprawdzenie, czy lista obserwowanych miast ma mniej niż 10 miast
+  if (watchlist.value.length < 10) {
+    if (!watchlist.value.includes(city)) {
+      watchlist.value.push(city)
+      fetchWeatherForCity(city.name)
     }
+  } else {
+    alert('You can only add up to 10 cities to the watchlist.')
+  }
+  searchQuery.value = ''
+  filteredCities.value = []
+}
 
     const removeFromWatchlist = (city: any) => {
       watchlist.value = watchlist.value.filter((c) => c.id !== city.id)

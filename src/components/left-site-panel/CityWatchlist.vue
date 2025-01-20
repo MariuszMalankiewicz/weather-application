@@ -1,23 +1,27 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row pb-5">
       <div
         v-for="city in watchlist"
         :key="city.id"
-        class="col-6 col-sm-4 col-sm-6 col-lg-4 col-xl-3 col-xxl-2 text-center"
+        class="col-6 col-sm-4 col-sm-6 col-lg-4 col-xl-3 text-center"
       >
-        <img :src="cityImg" alt="city" class="rounded img-rwd" />
-        <p class="mt-1 mb-0">{{ city.name }}, {{ city.country }}</p>
-        <p class="mt-1 mb-0">Temp: {{ weatherData[city.name]?.temp?.toFixed(0) }}°C</p>
-        <p class="mt-1 mb-0">Humidity: {{ weatherData[city.name]?.humidity }}%</p>
-        <button @click="viewWeatherChart(city.name)" class="btn btn-link btn-sm mb-0">
-          Details
-        </button>
-        <button
-          @click="$emit('remove', city)"
-          class="btn btn-danger btn-sm mt-1 mb-3">
-          Delete
-        </button>
+        <div class="rounded border wrapper">
+          <img :src="cityImg" alt="city" class="w-100" />
+          <p class="mt-2 mb-0 fw-bold">{{ city.name }}, {{ city.country }}</p>
+          <p class="mt-1 mb-0">Temp: {{ weatherData[city.name]?.temp?.toFixed(0) }}°C</p>
+          <p class="mt-1 mb-0">Humidity: {{ weatherData[city.name]?.humidity }}%</p>
+          <div class="d-flex justify-content-center align-items-center gap-3 mt-2 mb-3">
+            <button @click="viewWeatherChart(city.name)" class="btn btn-primary btn-sm">
+            Details
+            </button>
+            <button
+              @click="$emit('remove', city)"
+              class="btn btn-danger btn-sm">
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -60,8 +64,8 @@ export default defineComponent({
 })
 </script>
 <style>
-.img-rwd {
+.wrapper{
   width: 100%;
-  max-width: 160px;
+  max-width: 200px;
 }
 </style>

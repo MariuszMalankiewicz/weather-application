@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 px-4">
+  <div class="pt-4 px-3 px-sm-4">
     <div class="d-flex mt-md-2 mt-lg-3 ms-md-2 ms-lg-3">
       <div class="position-relative">
         <svg
