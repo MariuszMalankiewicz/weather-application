@@ -10,8 +10,13 @@
         <p class="mt-1 mb-0">{{ city.name }}, {{ city.country }}</p>
         <p class="mt-1 mb-0">Temp: {{ weatherData[city.name]?.temp?.toFixed(0) }}°C</p>
         <p class="mt-1 mb-0">Humidity: {{ weatherData[city.name]?.humidity }}%</p>
-        <button @click="viewWeatherChart(city.name)" class="btn btn-link btn-sm mb-3">
+        <button @click="viewWeatherChart(city.name)" class="btn btn-link btn-sm mb-0">
           Details
+        </button>
+        <button
+          @click="$emit('remove', city)"
+          class="btn btn-danger btn-sm mt-1 mb-3">
+          Delete
         </button>
       </div>
     </div>

@@ -20,7 +20,9 @@
       <div>
         <CityWatchlist
         :watchlist="watchlist"
-        :weatherData="weatherData" />
+        :weatherData="weatherData"
+        @remove="removeFromWatchlist"
+        />
       </div>
     </div>
   </div>
