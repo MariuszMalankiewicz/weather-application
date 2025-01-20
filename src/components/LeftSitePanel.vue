@@ -50,7 +50,7 @@ export default {
     }
 
     const filterCities = () => {
-      if (searchQuery.value) {
+      if (searchQuery.value.trim()) {
         filteredCities.value = cities.value
           .filter((city) => city.name.toLowerCase().includes(searchQuery.value.toLowerCase()))
           .slice(0, 5)
@@ -60,8 +60,12 @@ export default {
     }
 
     const addToWatchlist = (city: any) => {
-      if (!watchlist.value.includes(city)) watchlist.value.push(city)
-      fetchWeatherForCity(city.name)
+      if (!watchlist.value.includes(city)) {
+        watchlist.value.push(city)
+        fetchWeatherForCity(city.name)
+      }
+      searchQuery.value = ''
+      filteredCities.value = []
     }
 
     const removeFromWatchlist = (city: any) => {

@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   name: 'CitySearch',
@@ -52,6 +52,10 @@ export default defineComponent({
       emit('update:searchQuery', localSearchQuery.value)
       props.filterCities()
     }
+
+    watch(() => props.searchQuery, (newQuery) => {
+      localSearchQuery.value = newQuery
+    })
 
     return {
       localSearchQuery,
