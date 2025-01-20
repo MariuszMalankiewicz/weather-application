@@ -6,7 +6,7 @@
         :key="city.id"
         class="col-6 col-sm-4 col-sm-6 col-lg-4 col-xl-3 text-center"
       >
-        <div class="rounded border wrapper">
+        <div class="rounded border wrapper mb-3">
           <img :src="cityImg" alt="city" class="w-100" />
           <p class="mt-2 mb-0 fw-bold">{{ city.name }}, {{ city.country }}</p>
           <p class="mt-1 mb-0">Temp: {{ weatherData[city.name]?.temp?.toFixed(0) }}°C</p>
