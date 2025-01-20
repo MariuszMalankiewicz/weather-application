@@ -1,39 +1,66 @@
-# weather-app
+# Weather App 🌦️
 
-This template should help get you started developing with Vue 3 in Vite.
+A weather application built using **Vue.js**, **TypeScript**, and **Bootstrap 5**. It allows users to search for current weather conditions in any city and displays detailed information about atmospheric conditions.
 
-## Recommended IDE Setup
+## Features ✨
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Search for weather in any city.
+- Display temperature and humidity.
+- Responsive user interface based on Bootstrap 5.
+- TypeScript support for improved code quality and enhanced type safety.
+- Retrieve the user's location and display the current weather for their area.
+- Simple authentication system using localStorage to store user credentials.
+- Ability to add cities to a watchlist for easy access to their weather information.
 
-## Type Support for `.vue` Imports in TS
+## Technologies 🛠️
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Vue.js** - frontend framework.
+- **TypeScript** - ensures type safety and simplifies coding.
+- **Bootstrap 5** - responsive design.
+- **Axios** - for communicating with the weather API.
+- **OpenWeatherMap API** - the source of weather data.
+- **Vite** - a fast and modern build tool for development and production.
+- **Prettier** - code formatting tool to ensure consistent styling across the project.
+- **ESLint** - a linter to analyze code for potential errors and enforce coding standards.
+- **Chart.js** - for visualizing weather data with interactive charts.
 
-## Customize configuration
+## System Requirements 💻
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Node.js version v20.11.0 ir highter.
+A browser that supports ES6.
 
-## Project Setup
+## Installation 🚀
 
-```sh
+1.  Clone the repository:
+
+```bash
+git clone https://github.com/MariuszMalankiewicz/weather-application.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd weather-app
+```
+
+3. Install dependencies:
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+3. Create a config.js file in the root of the project and add your API key:
 
-```sh
+```bash
+export const API_KEY = 'your_api_key'
+```
+
+4. Run the project:
+
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## License 📜
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+This project is licensed under the MIT License.
